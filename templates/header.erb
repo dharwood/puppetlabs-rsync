@@ -1,13 +1,16 @@
 # This file is being maintained by Puppet.
 # DO NOT EDIT
 
-pid file = /var/run/rsyncd.pid
+pid file = <%= @pid_file %>
 uid = nobody
 gid = nobody
 use chroot = <%= @use_chroot %>
 log format = %t %a %m %f %b
-syslog facility = local3
-timeout = 300
+syslog facility = <%= @syslog_fac %>
+<% if @log_file -%>
+log file = <%= @log_file %>
+<% end -%>
+timeout = <%= @timeout %>
 address = <%= @address %>
 <% if @motd_file != 'UNSET' -%>
 motd file = <%= @motd_file %>
